@@ -1,6 +1,5 @@
-# Don't Remove Credit Tg - @VJ_Botz
-# Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
-# Ask Doubt on telegram @KingVJ01
+
+# Ask Doubt on telegram @ramjiofficial
 
 import os
 import time
@@ -154,7 +153,7 @@ def time_name():
 
 
 async def download_video(url,cmd, name):
-download_cmd = f'{cmd} -R 25 --fragment-retries 25 --external-downloader aria2c --downloader-args "aria2c: -x 16 -j 32"
+    download_cmd = f'{cmd} -R 25 --fragment-retries 25 --external-downloader aria2c --downloader-args "aria2c: -x 16 -j 32"'
     global failed_counter
     print(download_cmd)
     logging.info(download_cmd)
@@ -174,8 +173,8 @@ download_cmd = f'{cmd} -R 25 --fragment-retries 25 --external-downloader aria2c 
             return f"{name}.mkv"
         elif os.path.isfile(f"{name}.mp4"):
             return f"{name}.mp4"
-        elif os.path.isfile(f"{name}.mp4.webm"):
-            return f"{name}.mp4.webm"
+        elif os.path.isfile(f"{name}.mp4"):
+            return f"{name}.mp4"
 
         return name
     except FileNotFoundError as exc:
