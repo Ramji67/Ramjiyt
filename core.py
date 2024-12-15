@@ -1,5 +1,6 @@
-
-# Ask Doubt on telegram @ramjiofficial
+# Don't Remove Credit Tg - @VJ_Botz
+# Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
+# Ask Doubt on telegram @KingVJ01
 
 import os
 import time
@@ -173,8 +174,8 @@ async def download_video(url,cmd, name):
             return f"{name}.mkv"
         elif os.path.isfile(f"{name}.mp4"):
             return f"{name}.mp4"
-        elif os.path.isfile(f"{name}.mp4"):
-            return f"{name}.mp4"
+        elif os.path.isfile(f"{name}.mp4.webm"):
+            return f"{name}.mp4.webm"
 
         return name
     except FileNotFoundError as exc:
