@@ -9,7 +9,7 @@ import asyncio
 import requests
 import subprocess
 
-import core as helper
+import helper
 from utils import progress_bar
 from vars import API_ID, API_HASH, BOT_TOKEN
 from aiohttp import ClientSession
