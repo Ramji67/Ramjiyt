@@ -151,6 +151,60 @@ def time_name():
     now = datetime.datetime.now()
     current_time = now.strftime("%H%M%S")
     return f"{date} {current_time}.mp4"
+    #======================== YOUTUBE EXTRACTOR =====================
+
+def get_playlist_videos(playlist_url):
+    try:
+        # Create a Playlist object
+        playlist = Playlist(playlist_url)
+        
+        # Get the playlist title
+        playlist_title = playlist.title
+        
+        # Initialize an empty dictionary to store video names and links
+        videos = {}
+        
+        # Iterate through the videos in the playlist
+        for video in playlist.videos:
+            try:
+                video_title = video.title
+                video_url = video.watch_url
+                videos[video_title] = video_url
+            except Exception as e:
+                logging.error(f"Could not retrieve video details: {e}")
+        
+        return playlist_title, videos
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
+        return None, None
+
+def get_all_videos(channel_url):
+    ydl_opts = {
+        'quiet': True,
+        'extract_flat': True,
+        'skip_download': True
+    }
+
+    all_videos = []
+    with YoutubeDL(ydl_opts) as ydl:
+        result = ydl.extract_info(channel_url, download=False)
+        
+        if 'entries' in result:
+            channel_name = result['title']
+            all_videos.extend(result['entries'])
+            
+            while 'entries' in result and '_next' in result:
+                next_page_url = result['_next']
+                result = ydl.extract_info(next_page_url, download=False)
+                all_videos.extend(result['entries'])
+            
+            video_links = {index+1: (video['title'], video['url']) for index, video in enumerate(all_videos)}
+            return video_links, channel_name
+        else:
+            return None, None
+            
+
+
 
 
 async def download_video(url,cmd, name):
@@ -167,7 +221,10 @@ async def download_video(url,cmd, name):
     try:
         if os.path.isfile(name):
             return name
-        elif os.path.isfile(f"{name}.webm"):
+        elif os.path.i
+
+
+            sfile(f"{name}.webm"):
             return f"{name}.webm"
         name = name.split(".")[0]
         if os.path.isfile(f"{name}.mkv"):
