@@ -19,6 +19,7 @@ from utils import progress_bar
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
+cookies_path = 'cookies.txt'
 def duration(filename):
     result = subprocess.run(["ffprobe", "-v", "error", "-show_entries",
                              "format=duration", "-of",
