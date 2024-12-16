@@ -161,11 +161,7 @@ async def upload(bot: Client, m: Message):
              url =f'https://extractbot.onrender.com/classplus?link={url}'    
             elif "apps-s3-jw-prod.utkarshapp.com" in url:
 
-                elif "cwmediabkt99.crwilladmin.com" in url:
-            	url = url.replace(' ', '%20')
-            elif ".pdf*abcdefg" in url:
-             a = url.replace('*abcdefg', '')
-             url = a
+                
         
                 if 'enc_plain_mp4' in url:
                     url = url.replace(url.split("/")[-1], res+'.mp4')
