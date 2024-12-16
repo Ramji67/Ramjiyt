@@ -216,32 +216,39 @@ async def upload(bot: Client, m: Message):
             else:
                 cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
 
-            try:
+            try:  
                 
-                cc = f'**[📽️] Vid_ID:** {str(count).zfill(3)} {𝗻𝗮𝗺𝗲𝟭}.mkv\n\n**𝔹ᴀᴛᴄʜ** » **{raw_text0}\n\n** Extracted By ➤ :{MR}'
+                cc = f'**[▶️] Vid_ID :** {str(count).zfill(3)}\n\n**Video Title :** {name1}\n\n**Batch Name :** {raw_text0}\n\n**Extracted By ➤ {MR}**'
+                cc1 = f'**[📑] Pdf_ID :** {str(count).zfill(3)}\n\n**File Title :** {name1}\n\n**Batch Name :** {raw_text0}\n\n**Extracted By ➤ {MR}**'                
+                if "*" in url:
+                     a, k = url.split("*", 1)
+                     url = a
+                     key = k
+                     try:
+                      	if ".pdf" in a:
+                      		Show = f"⥥ 🄳🄾🅆🄽🄻🄾🄰🄳🄸🄽🄶⬇️⬇️... »\n\n📝Name » {name}\n❄Quality » {raw_text2}\n\n🔗URL » {url}"
+                      		prog = await m.reply_text(Show)
+                      		file_path = await helper.download_file(url, name)
+                      		copy = helper.decrypt_file(file_path, key)
+                      		filename = file_path
+                      		await prog.delete(True)
+                      		await bot.send_document(chat_id=m.chat.id, document=filename, caption=cc1)
+                      		count += 1
+                      	else:
+                      		Show = f"⥥ 🄳🄾🅆🄽🄻🄾🄰🄳🄸🄽🄶⬇️⬇️... »\n\n📝Name » {name}\n❄Quality » {raw_text2}\n\n🔗URL » {url}"
+                      		prog = await m.reply_text(Show)
+                      		file_path = await helper.download_file(url, name)
+                      		copy = helper.decrypt_file(file_path, key)
+                      		filename = file_path
+                      		await prog.delete(True)
+                      		await helper.send_vid(bot, m, cc, filename, thumb, name, prog)
+                      		count += 1
+                     except FloodWait as e:
+                      await m.reply_text(str(e))
+                      time.sleep(1)
+                      continue
                 
-    
-                cc1 = f'**[📁] Pdf_ID:** {str(count).zfill(3)} {𝗻𝗮𝗺𝗲𝟭}.pdf \n\n**𝔹ᴀᴛᴄʜ** » **{raw_text0}\n\n** Extracted By ➤ :{MR}'
-                if ".mp4" in url:
-                    try:
-                        ka = await helper.download(url, name)
-                        
-                        await bot.send_video(
-                chat_id=update.chat.id,
-                video=ka,
-                caption=description,
-                duration=duration,
-                width=width,
-                height=height,
-                        )
-                        
-                        os.remove(ka)
-                        time.sleep(1)
-                    except FloodWait as e:
-                        await m.reply_text(str(e))
-                        time.sleep(e.x)
-                        continue
-                        elif "drive" in url or ".ws" in url or "cwmediabkt99.crwilladmin.com" in url:
+                elif "drive" in url or ".ws" in url or "cwmediabkt99.crwilladmin.com" in url:
                     try:
                         ka = await helper.download(url, name)
                         copy = await bot.send_document(chat_id=m.chat.id,document=ka, caption=cc1)
@@ -252,7 +259,6 @@ async def upload(bot: Client, m: Message):
                         await m.reply_text(str(e))
                         time.sleep(e.x)
                         continue
-                
                 elif ".pdf" in url:
                     try:
                         cmd = f'yt-dlp -o "{name}.pdf" "{url}"'
@@ -266,7 +272,7 @@ async def upload(bot: Client, m: Message):
                         time.sleep(e.x)
                         continue
                 else:
-                    Show = f"**⥥ 🄳🄾🅆🄽🄻🄾🄰🄳🄸🄽🄶⬇️⬇️... »**\n\n**📝Name »** `{name}\n❄Quality » {raw_text2}`\n\n**🔗URL »** `{url}` \n\n Extracted By ➤ 🅹🅰🅸 🆂🅷🆁🅸 🆁🅰🅼"
+                    Show = f"**⥥ 🄳🄾🅆🄽🄻🄾🄰🄳🄸🄽🄶⬇️⬇️... »**\n\n**📝Name »** `{name}\n❄Quality » {raw_text2}`\n\n**🔗URL »** `{url}`"
                     prog = await m.reply_text(Show)
                     res_file = await helper.download_video(url, cmd, name)
                     filename = res_file
@@ -283,7 +289,7 @@ async def upload(bot: Client, m: Message):
 
     except Exception as e:
         await m.reply_text(e)
-    await m.reply_text("**𝔻ᴏɴᴇ 𝔹ᴏ𝕤𝕤😎 🅹🅰🅸 🆂🅷🆁🅸 🆁🅰🅼**")
+    await m.reply_text("**𝔻ᴏɴᴇ 𝔹ᴏ𝕤𝕤😎**")
 
 
 bot.run()
