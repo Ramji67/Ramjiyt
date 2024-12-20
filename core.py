@@ -1,5 +1,8 @@
 
 # Ask Doubt on telegram @ramjiofficial
+import core
+# or
+from core import download_file
 
 import os
 import time
