@@ -1,6 +1,5 @@
 
 # Ask Doubt on telegram @ramjiofficial
-import core
 import download_file
 
 import os
