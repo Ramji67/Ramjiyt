@@ -1,7 +1,5 @@
 
-import core
-# or
-from core import download_file
+ import download_file
 import os
 import re
 import sys
